@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS Negihborhood;
+DROP DATABASE IF EXISTS neighborhood_db;
 
-CREATE DATABASE Negihborhood;
--- USE user_db;
+CREATE DATABASE neighborhood_db;
+-- USE neighborhood_db;

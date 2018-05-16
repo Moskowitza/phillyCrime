@@ -1,35 +1,45 @@
-// *********************************************************************************
-// api-routes.js - this file offers a set of routes for displaying and saving data to the db
-// *********************************************************************************
-
-// Dependencies
-// =============================================================
-
-// Grabbing our models
-
 var db = require("../models");
 
-// Routes
-// =============================================================
 module.exports = function(app) {
-
-  // GET route for getting all of the users
   app.get("/api/users", function(req, res) {
-
+    // Here we add an "include" property to our options in our findAll query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Post
+    db.user.findAll({
+      include: [db.Post]
+    }).then(function(dbuser) {
+      res.json(dbuser);
+    });
   });
 
-  // POST route for saving a new todo. You can create a todo using the data on req.body
+  app.get("/api/users/:id", function(req, res) {
+    // Here we add an "include" property to our options in our findOne query
+    // We set the value to an array of the models we want to include in a left outer join
+    // In this case, just db.Post
+    db.user.findOne({
+      where: {
+        id: req.params.id
+      },
+      include: [db.Post]
+    }).then(function(dbuser) {
+      res.json(dbuser);
+    });
+  });
+
   app.post("/api/users", function(req, res) {
-
+    db.user.create(req.body).then(function(dbuser) {
+      res.json(dbuser);
+    });
   });
 
-  // DELETE route for deleting users. You can access the todo's id in req.params.id
   app.delete("/api/users/:id", function(req, res) {
-
+    db.user.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbuser) {
+      res.json(dbuser);
+    });
   });
 
-  // PUT route for updating users. The updated todo will be available in req.body
-  app.put("/api/users", function(req, res) {
-
-  });
 };
