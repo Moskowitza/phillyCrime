@@ -25,8 +25,9 @@ Adding user interface for commenting and voting to philly crime data.
 |    └──
 ├──views
 |   └──layouts
-|      └──main.handlebars
+|   |   └──main.handlebars
 |   └──partials
-|      └──user.handlebars
+|   |   └──user.handlebars
+|   └──index.handlebars
 ├──package.json
 ├──server.js
